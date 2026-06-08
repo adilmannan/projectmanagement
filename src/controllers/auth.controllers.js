@@ -14,7 +14,7 @@ const generateAccessAndRefreshTokens = async (UserId) => {
 
     user.refreshToken = refreshToken;
     await user.save({ validateBeforeSave: false });
-    return { accessToken, refreshTokenii };
+    return { accessToken, refreshToken };
   } catch (error) {
     throw new ApiError(
       500,
@@ -63,7 +63,7 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   const createdUser = await User.findById(user._id).select(
-    "—password -refreshToken —emailVerificationToken -emailVerificationExpiry",
+    "-password -refreshToken -emailVerificationToken -emailVerificationExpiry",
   );
 
   if (!createdUser) {
